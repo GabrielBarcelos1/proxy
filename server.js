@@ -1,10 +1,15 @@
 const express = require('express');
-const cors = require('cors');
 const axios = require('axios');
 const app = express();
 require('dotenv').config();
 
-app.use(cors());
+// Middleware para permitir CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'x-prolog-api-token, Content-Type, Accept');
+  next();
+});
 
 // Rota para encaminhar todas as solicitações GET
 app.get('/api/*', async (req, res) => {
@@ -24,5 +29,5 @@ console.log(`console.log https://prologapp.com/prolog/api/v3/${path}`)
   }
 });
 
-const PORT = 3000;
+const PORT = 3002;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
