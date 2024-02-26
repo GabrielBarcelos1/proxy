@@ -1,7 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const axios = require('axios');
 const app = express();
 require('dotenv').config();
+
+app.use(cors());
 
 // Middleware para permitir CORS
 app.use((req, res, next) => {
